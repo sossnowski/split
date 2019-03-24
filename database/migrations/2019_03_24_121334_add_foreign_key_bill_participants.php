@@ -15,6 +15,7 @@ class AddForeignKeyBillParticipants extends Migration
     {
         Schema::create('bill_participants', function (Blueprint $table) {
             $table->foreign('bill_participant_id_owner')->references('id')->on('bill_participants')->onDelete('cascade');
+            $table->foreign('bill_id')->references('id')->on('bills')->onDelete('cascade');
         });
     }
 
