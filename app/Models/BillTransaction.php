@@ -15,4 +15,16 @@ class BillTransaction extends Model
     protected $fillable = [
         'bill_id', 'bill_participant_id_from', 'bill_participant_id_to', 'amount'
     ];
+
+    // transaction belongs to one bill
+    public function TransactionBill()
+    {
+        return $this->belongsTo('Models/Bill');
+    }
+
+    // transaction belongs to one participant
+    public function transactionParticipant()
+    {
+        return $this->belongsTo('Models/BillParticipant');
+    }
 }

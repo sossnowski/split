@@ -16,4 +16,16 @@ class BillParticipant extends Model
     protected $fillable = [
         'bill_id', 'name', 'amount', 'is_confirmed', 'bill_participant_id_owner'
     ];
+
+    // bill participant belongs to one bill
+    public function bill()
+    {
+        return $this->belongsTo('Models/Bill');
+    }
+
+    // bill participant has many transactions
+    public function billParticipantTransactions()
+    {
+        return $this->hasMany('Models/BillTransaction');
+    }
 }
