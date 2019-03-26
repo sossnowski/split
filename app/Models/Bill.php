@@ -13,4 +13,16 @@ class Bill extends Model
      * @var array
      */
     protected $fillable = ['name'];
+
+    // bill has many participants
+    public function billParticipants()
+    {
+        return $this->hasMany('Models/BillParticipant');
+    }
+
+    // bill has many transactions
+    public function billTransactions()
+    {
+        return $this->hasMany('Models/BillTransaction');
+    }
 }
