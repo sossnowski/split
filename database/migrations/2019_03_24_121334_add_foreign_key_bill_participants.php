@@ -26,6 +26,9 @@ class AddForeignKeyBillParticipants extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('bill_transactions', function (Blueprint $table) {
+            $table->dropForeign(['bill_participant_id_owner']);
+            $table->dropForeign(['bill_id']);
+        });
     }
 }

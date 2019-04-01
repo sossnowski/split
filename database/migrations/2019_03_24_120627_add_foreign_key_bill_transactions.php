@@ -28,6 +28,9 @@ class AddForeignKeyBillTransactions extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('bill_transactions', function (Blueprint $table) {
+            $table->dropForeign(['bill_participant_id_from']);
+            $table->dropForeign(['bill_participant_id_to']);
+        });
     }
 }
