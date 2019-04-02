@@ -14,13 +14,18 @@ class CreateBillParticipantsTable extends Migration
     public function up()
     {
         Schema::create('bill_participants', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->unsignedInteger('bill_id');
             $table->string('name');
             $table->unsignedBigInteger('amount');
             $table->boolean('is_confirmed');
             $table->unsignedInteger('bill_participant_id_owner')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('bill_participants', function (Blueprint $table) {
+            $table->foreign('bill_participant_id_owner')->references('id')->on('bill_participants')->onDelete('cascade');
+            $table->foreign('bill_id')->references('id')->on('bills')->onDelete('cascade');
         });
     }
 

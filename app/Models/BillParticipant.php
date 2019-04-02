@@ -20,12 +20,12 @@ class BillParticipant extends Model
     // bill participant belongs to one bill
     public function bill()
     {
-        return $this->belongsTo('Models/Bill');
+        return $this->belongsTo('App\Models\Bill');
     }
 
     // bill participant has many transactions
     public function billParticipantTransactions()
     {
-        return $this->hasMany('Models/BillTransaction');
+        return $this->hasMany('App\Models\BillTransaction');
     }
 }

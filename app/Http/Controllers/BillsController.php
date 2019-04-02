@@ -35,6 +35,6 @@ class BillsController extends Controller
 
     public function getBill(CreateBillRequest $request, $id = null)
     {
-        return new BillResource(Bill::where('id', $id)->get()); // wywala response z odpowiednimi polami (jak wejdziesz w klase bedziesz mial info co i jak) i w odpowiednim formacie (JSON).
+        return new BillResource(Bill::get()); // wywala response z odpowiednimi polami (jak wejdziesz w klase bedziesz mial info co i jak) i w odpowiednim formacie (JSON).
     }
 }

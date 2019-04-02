@@ -27,19 +27,19 @@ class BillCreator
     public function create(array $data)
     {
         //partition data on bill and billParticipants
-        $billData = [
-            'name' => $data['name']
-        ];
-        $billId = $this->billRepository->create($billData);
+        // $billData = [
+        //     'name' => $data['name']
+        // ];
+        $bill = $this->billRepository->create($data);
 
-        $billParticipantData = [
-            'bill_id' => $billId,
-            'is_confirmed' => 0,
-            'bill_participant_id_owner' => $data['bill_participant_id_owner'],
-            'participants' => $data['participants']
-        ];
+        // $billParticipantData = [
+        //     'bill_id' => $billId,
+        //     'is_confirmed' => 0,
+        //     'bill_participant_id_owner' => $data['bill_participant_id_owner'],
+        //     'participants' => $data['participants']
+        // ];
 
-        return $this->billParticipantRepository->create($billParticipantData);
+        return $this->billParticipantRepository->create($data, $bill);
         
     }
 }
