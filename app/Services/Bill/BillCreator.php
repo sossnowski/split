@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Repositories\BillRepository;
 use App\Repositories\BillParticipantRepository;
+use Response;
 
 class BillCreator
 {
@@ -26,20 +27,18 @@ class BillCreator
      */
     public function create(array $data)
     {
-        //partition data on bill and billParticipants
-        // $billData = [
-        //     'name' => $data['name']
-        // ];
         $bill = $this->billRepository->create($data);
+        if($this->billParticipantRepository->create($data, $bill)) {
+            return Response::json([
+                'success' => true
+            ], 201);
+        }else {
+            return Response::json([
+                'success' => false
+            ], 400);
+        }
 
-        // $billParticipantData = [
-        //     'bill_id' => $billId,
-        //     'is_confirmed' => 0,
-        //     'bill_participant_id_owner' => $data['bill_participant_id_owner'],
-        //     'participants' => $data['participants']
-        // ];
 
-        return $this->billParticipantRepository->create($data, $bill);
         
     }
 }
