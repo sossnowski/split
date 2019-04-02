@@ -28,7 +28,17 @@ class BillCreator
     public function create(array $data)
     {
         $bill = $this->billRepository->create($data);
-        if($this->billParticipantRepository->create($data, $bill)) {
+        $billParticipants = array();
+
+        foreach ($data['participants'] as $participant) {
+            array_push($billParticipants, [
+                'name' => $participant['name'],
+                'amount' => $participant['amount'],
+                'is_confirmed' => 0,
+            ]);
+        }
+
+        if($this->billParticipantRepository->create($billParticipants, $bill)) {
             return Response::json([
                 'success' => true
             ], 201);
