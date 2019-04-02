@@ -40,6 +40,6 @@ class User extends Authenticatable
     // user has many bills
     public function bills()
     {
-        return $this->hasMany('Models/Bill');
+        return $this->hasMany('App\Models\Bill');
     }
 }

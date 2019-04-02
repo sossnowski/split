@@ -17,12 +17,12 @@ class Bill extends Model
     // bill has many participants
     public function billParticipants()
     {
-        return $this->hasMany('Models/BillParticipant');
+        return $this->hasMany('App\Models\BillParticipant');
     }
 
     // bill has many transactions
     public function billTransactions()
     {
-        return $this->hasMany('Models/BillTransaction');
+        return $this->hasMany('App\Models\BillTransaction');
     }
 }

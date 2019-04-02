@@ -12,6 +12,9 @@ class BillRepository
      */
     public function create(array $data)
     {
-        return Bill::create($data);
+        return  Bill::create([
+            'name' => $data['name']
+        ]);
+
     }
 }
