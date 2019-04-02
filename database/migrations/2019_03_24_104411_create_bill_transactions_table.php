@@ -16,18 +16,15 @@ class CreateBillTransactionsTable extends Migration
         Schema::create('bill_transactions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('bill_id')->unsigned();
+            $table->foreign('bill_id')->references('id')->on('bills')->onDelete('cascade');
             $table->integer('bill_participant_id_from')->unsigned();
+            $table->foreign('bill_participant_id_from')->references('id')->on('bill_participants')->onDelete('cascade');
             $table->integer('bill_participant_id_to')->unsigned();
+            $table->foreign('bill_participant_id_to')->references('id')->on('bill_participants')->onDelete('cascade');
             $table->integer('amount')->unsigned();
             $table->timestamps();
         });
 
-        Schema::table('bill_transactions', function (Blueprint $table) {
-            $table->foreign('bill_id')->references('id')->on('bills')->onDelete('cascade');
-            $table->foreign('bill_participant_id_from')->references('id')->on('bill_participants')->onDelete('cascade');
-            $table->foreign('bill_participant_id_to')->references('id')->on('bill_participants')->onDelete('cascade');
-            
-        });
     }
 
     /**
