@@ -14,6 +14,7 @@ class BillCreator
     /**
      * BillCreator constructor.
      * @param BillRepository $billRepository
+     * @param BillParticipantRepository $billParticipantRepository
      */
     public function __construct(BillRepository $billRepository, BillParticipantRepository $billParticipantRepository)
     {
