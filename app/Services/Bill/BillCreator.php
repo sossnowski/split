@@ -39,7 +39,7 @@ class BillCreator
             ]);
         }
 
-        if($this->billParticipantRepository->create($billParticipants, $bill)) {
+        if($this->billParticipantRepository->create($bill, $billParticipants)) {
             return Response::json([
                 'success' => true
             ], 201);

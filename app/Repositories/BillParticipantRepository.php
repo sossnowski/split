@@ -10,7 +10,7 @@ class BillParticipantRepository
      * @param array $data
      * @return Bill
      */
-    public function create(array $billParticipants, $bill)
+    public function create($bill, array $billParticipants )
     {
         
         return $bill->billParticipants()->createMany($billParticipants);
