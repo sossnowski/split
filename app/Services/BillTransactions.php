@@ -2,32 +2,27 @@
 
 namespace App\Services;
 
-use App\Repositories\BillParticipantRepository;
-use Log;
 
 class BillTransactions
 {
-    protected $billParticipantRepository;
     protected $transactions;
     
     /**
      * BillTransactions constructor.
-     * @param BillParticipantRepository $billParticipantRepository
      */
-    public function __construct(BillParticipantRepository $billParticipantRepository)
+    public function __construct()
     {
-        $this->billParticipantRepository = $billParticipantRepository;
         $this->transactions = array();
     }
 
 
     /**
-     * @param integer $id
+     * @param array $bill
      * @return array $this->transactions
      */
-    public function calcEqual($id)
+    public function calcEqual($bill)
     {
-        $participants = $this->billParticipantRepository->getParticipants($id);
+        $participants = $bill->billParticipants->toArray();
         $howManyParticipants = count($participants);
         $sumOfExpensesInBill = 0;
 
