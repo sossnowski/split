@@ -30,6 +30,7 @@ class BillTransactions
             return $a['amount'] <=> $b['amount'];
         });
 
+
         for($i = 0; $i < $howManyParticipants; $i++) {
             $sumOfExpensesInBill += $participants[$i]['amount'];
         }
@@ -57,7 +58,7 @@ class BillTransactions
                 break;
             }
 
-            if ($amountShouldGet == 0) {
+            if ($amountShouldGet <= 0) {
                 continue;
             } else {
                 if ($amountShouldGet >= $amountShouldPay) {
@@ -83,7 +84,7 @@ class BillTransactions
                 }
             }
         }
-        return $this->transactions;
+        return $bill->billTransactions()->createMany($this->transactions);
 
         
     }
