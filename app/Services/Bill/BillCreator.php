@@ -44,11 +44,15 @@ class BillCreator
         }
 
         if($this->billParticipantRepository->create($bill, $billParticipants)) {
-            $transactions = $this->billTransactions->calcEqual($bill);
-            return Response::json([
-                'success' => true,
-                'transactions' => $transactions
-            ], 201);
+            if($this->billTransactions->calcEqual($bill)) {
+                return Response::json([
+                    'success' => true
+                ], 201);
+            } else {
+                return Response::json([
+                    'success' => false
+                ], 400);
+            }
         }else {
             return Response::json([
                 'success' => false
