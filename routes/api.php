@@ -19,4 +19,3 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('bill', 'BillsController@create');
 Route::get('bill/{id?}', 'BillsController@getBill');
-Route::get('calc-equal/{id}', 'BillTransactionsController@calcEqual');
