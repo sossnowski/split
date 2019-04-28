@@ -6,6 +6,7 @@ use App\Repositories\BillRepository;
 use App\Repositories\BillParticipantRepository;
 use App\Services\BillTransactions;
 use Response;
+use App\Models\Bill;
 
 class BillCreator
 {
@@ -28,7 +29,7 @@ class BillCreator
 
     /**
      * @param array $data
-     * @return \App\Models\Bill
+     * @return Response 
      */
     public function create(array $data)
     {
@@ -58,8 +59,17 @@ class BillCreator
                 'success' => false
             ], 400);
         }
+    }
 
-
-        
+    /**
+     * @param Request $request
+     * @param $id
+     * @return Response
+     */
+    public function updateBill($request, $id)
+    {
+        if($this->billRepository->deleteBill($id)) {
+            return $this->create($request->toArray());
+        }
     }
 }

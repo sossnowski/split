@@ -17,4 +17,9 @@ class BillRepository
         ]);
 
     }
+
+    public function deleteBill($id)
+    {
+        return Bill::destroy($id);
+    }
 }
