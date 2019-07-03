@@ -20,6 +20,13 @@ class Bill extends Model
         return $this->hasMany('App\Models\BillParticipant');
     }
 
+    public function billParticipantsSumExpenses()
+    {
+        return $this->billParticipants()
+            ->selectRaw('id, SUM(amount) as amount, name')
+            ->groupBy( 'name');
+    }
+
     // bill has many transactions
     public function billTransactions()
     {

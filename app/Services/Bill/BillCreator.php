@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
-use App\Repositories\BillRepository;
 use App\Repositories\BillParticipantRepository;
+use App\Repositories\BillRepository;
 use App\Services\BillTransactions;
 use Response;
 use App\Models\Bill;
@@ -14,11 +14,12 @@ class BillCreator
     protected $billParticipantRepository;
     protected $billTransactions;
 
+
     /**
      * BillCreator constructor.
      * @param BillRepository $billRepository
      * @param BillParticipantRepository $billParticipantRepository
-     * @param BillTransactions $billTransactions
+     * @param \App\Services\BillTransactions $billTransactions
      */
     public function __construct(BillRepository $billRepository, BillParticipantRepository $billParticipantRepository, BillTransactions $billTransactions)
     {
@@ -27,9 +28,10 @@ class BillCreator
         $this->billTransactions = $billTransactions;
     }
 
+
     /**
      * @param array $data
-     * @return Response 
+     * @return mixed
      */
     public function create(array $data)
     {
@@ -37,23 +39,18 @@ class BillCreator
         $billParticipants = array();
 
         foreach ($data['participants'] as $participant) {
-            array_push($billParticipants, [
-                'name' => $participant['name'],
-                'amount' => $participant['amount'],
-                'is_confirmed' => 0,
-            ]);
+            foreach ($participant['expenses'] as $expense){
+                array_push($billParticipants, [
+                    'name' => $participant['name'],
+                    'amount' => $expense['amount'],
+                    'purpose' => $expense['purpose'],
+                    'is_confirmed' => 0,
+                ]);
+            }
         }
 
         if($this->billParticipantRepository->create($bill, $billParticipants)) {
-            if($this->billTransactions->calcEqual($bill)) {
-                return Response::json([
-                    'success' => true
-                ], 201);
-            } else {
-                return Response::json([
-                    'success' => false
-                ], 400);
-            }
+            return $this->billTransactions->calcEqual($bill);
         }else {
             return Response::json([
                 'success' => false

@@ -14,7 +14,7 @@ class BillParticipant extends Model
      * @var array
      */
     protected $fillable = [
-        'bill_id', 'name', 'amount', 'is_confirmed', 'bill_participant_id_owner'
+        'bill_id', 'name', 'amount', 'is_confirmed', 'bill_participant_id_owner', 'purpose'
     ];
 
     // bill participant belongs to one bill

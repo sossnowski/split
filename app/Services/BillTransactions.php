@@ -22,7 +22,7 @@ class BillTransactions
      */
     public function calcEqual($bill)
     {
-        $participants = $bill->billParticipants->toArray();
+        $participants = $bill->billParticipantsSumExpenses->toArray();
         $howManyParticipants = count($participants);
         $sumOfExpensesInBill = 0;
 
@@ -65,6 +65,8 @@ class BillTransactions
                     array_push($this->transactions, [
                         'bill_participant_id_from' => $participants[$j]['id'],
                         'bill_participant_id_to' => $participants[$i]['id'],
+                        'name_from' => $participants[$j]['name'],
+                        'name_to' => $participants[$i]['name'],
                         'amount' => $amountShouldPay
                     ]);
     
@@ -76,6 +78,8 @@ class BillTransactions
                     array_push($this->transactions, [
                         'bill_participant_id_from' => $participants[$j]['id'],
                         'bill_participant_id_to' => $participants[$i]['id'],
+                        'name_from' => $participants[$j]['name'],
+                        'name_to' => $participants[$i]['name'],
                         'amount' => $amountShouldGet
                     ]);
 
@@ -84,9 +88,10 @@ class BillTransactions
                 }
             }
         }
-        return $bill->billTransactions()->createMany($this->transactions);
+        $bill->billTransactions()->createMany($this->transactions);
+        return $this->transactions;
 
-        
+
     }
 
 }
