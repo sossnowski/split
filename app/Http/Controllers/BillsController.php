@@ -34,9 +34,17 @@ class BillsController extends Controller
         return $bill = $this->billCreator->create($request->post());
     }
 
+    /**
+     * @return array
+     */
     public function getBills()
     {
         return $this->billDisplayer->getBills();
+    }
+
+    public function getBill(Request $request)
+    {
+        return $this->billDisplayer->getBill($request->id);
     }
 
     /**
