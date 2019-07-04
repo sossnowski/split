@@ -89,8 +89,10 @@ class BillTransactions
             }
         }
         $bill->billTransactions()->createMany($this->transactions);
-        return $this->transactions;
-
+        return [
+            "transactions" => $this->transactions,
+            "id" => rand(1000000000344, 9999999999999).$bill->id
+        ];
 
     }
 
