@@ -28,6 +28,7 @@ class BillDisplayer
 
     public function getBill($id)
     {
+        $id = substr($id, 13);
         $bill = Bill::with(['billParticipants', 'billTransactions'])->where('id', $id)->get();
 //        dd(count($bill));
         return count($bill) !== 0 ? $bill :
