@@ -91,8 +91,8 @@ class BillTransactions
         $bill->billTransactions()->createMany($this->transactions);
         return [
             "transactions" => $this->transactions,
-            "id" => rand(1000000, 9999999).rand(1000000, 9999999).$bill->id
-        ];
+            "id" => $bill->number
+        ]; 
 
     }
 

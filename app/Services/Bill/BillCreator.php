@@ -35,6 +35,7 @@ class BillCreator
      */
     public function create(array $data)
     {
+        $data['number'] = date('Y').date('m').date('d').date('H').date('i').date('s').rand(101,999);
         $bill = $this->billRepository->create($data);
         $billParticipants = array();
 

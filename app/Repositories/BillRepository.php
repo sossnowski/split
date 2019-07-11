@@ -13,7 +13,8 @@ class BillRepository
     public function create(array $data)
     {
         return  Bill::create([
-            'name' => $data['name']
+            'name' => $data['name'],
+            'number' => $data['number']
         ]);
 
     }

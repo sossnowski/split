@@ -12,7 +12,7 @@ class Bill extends Model
      *
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['id', 'name', 'number'];
 
     // bill has many participants
     public function billParticipants()

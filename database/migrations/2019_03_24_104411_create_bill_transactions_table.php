@@ -21,7 +21,7 @@ class CreateBillTransactionsTable extends Migration
             $table->foreign('bill_participant_id_from')->references('id')->on('bill_participants')->onDelete('cascade');
             $table->integer('bill_participant_id_to')->unsigned();
             $table->foreign('bill_participant_id_to')->references('id')->on('bill_participants')->onDelete('cascade');
-            $table->integer('amount')->unsigned();
+            $table->float('amount')->unsigned();
             $table->timestamps();
         });
 
